@@ -27,6 +27,17 @@ struct PosterPhotoPicker: View {
                     .background(Color(white: 0.4, opacity: 0.32))
             }
         }
+        .toolbar() {
+            if let imageData, let uiImage = UIImage(data: imageData) {
+                ToolbarItem(placement: .secondaryAction) {
+                    NavigationLink {
+                        PerspectiveAdjustmentView(image: uiImage)
+                    } label: {
+                        Text("Straighten")
+                    }
+                }
+            }
+        }
         .onChange(of: newImage) {
             guard let newImage else { return }
             Task {
